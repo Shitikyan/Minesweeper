@@ -3,6 +3,7 @@ export interface IBoardProps {
   width: number;
   mines: number;
   status: number | string;
+  ref: any;
 }
 
 export type TGrid = Array<Array<ICell>>;

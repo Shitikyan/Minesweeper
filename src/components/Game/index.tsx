@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Board } from "../Board";
 
 import "./game.css";
 
 export const Game = () => {
+  const restartRef = useRef<any>();
+
   const [width, setWidth] = useState<number>(8);
   const [mines, setMines] = useState<number>(10);
   const [height, setHeight] = useState<number>(8);
@@ -21,12 +23,18 @@ export const Game = () => {
   };
 
   const restartGame = () => {
-    location.reload();
+    if (restartRef.current) restartRef.current.restart();
   };
 
   return (
     <div className="game">
-      <Board height={height} width={width} mines={mines} status={0} />
+      <Board
+        ref={restartRef}
+        height={height}
+        width={width}
+        mines={mines}
+        status={0}
+      />
       <div className="control-buttons">
         <button onClick={restartGame}>Restart</button>
         <form className="form">
